@@ -6,6 +6,7 @@ using System.Net;
 using System.Net.Mail;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Hosting;
 
 namespace Essays.Controllers
 {
@@ -31,11 +32,11 @@ namespace Essays.Controllers
             // m.Body = t;
             // m.IsBodyHtml = true;
             // smtp.Send(m);
-            using (StreamWriter sw = new StreamWriter(new FileStream($"~/Content/offers/{Guid.NewGuid()}.txt", FileMode.OpenOrCreate, FileAccess.Write)))
+            using (StreamWriter sw = new StreamWriter(new FileStream(HostingEnvironment.MapPath($"~/Content/offers/{Guid.NewGuid()}.txt"), FileMode.OpenOrCreate, FileAccess.Write)))
             {
                 sw.WriteLine($"From: {HttpContext.Request.Form["name"]}");
                 sw.WriteLine($"Email: {HttpContext.Request.Form["email"]}");
-                sw.WriteLine($"Message: {HttpContext.Request.Form["message"]}");
+                sw.WriteLine($"\nMessage: {HttpContext.Request.Form["message"]}");
             }
             return RedirectToAction("Index");
         }
