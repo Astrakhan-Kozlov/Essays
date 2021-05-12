@@ -31,7 +31,12 @@ namespace Essays.Controllers
             // m.Body = t;
             // m.IsBodyHtml = true;
             // smtp.Send(m);
-
+            using (StreamWriter sw = new StreamWriter(new FileStream($"~/Content/offers/{Guid.NewGuid()}.txt", FileMode.OpenOrCreate, FileAccess.Write)))
+            {
+                sw.WriteLine($"From: {HttpContext.Request.Form["name"]}");
+                sw.WriteLine($"Email: {HttpContext.Request.Form["email"]}");
+                sw.WriteLine($"Message: {HttpContext.Request.Form["message"]}");
+            }
             return RedirectToAction("Index");
         }
 
