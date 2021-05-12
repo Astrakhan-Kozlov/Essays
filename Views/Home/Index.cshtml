@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+@section Styles {
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css">
+}
+
+<header>
+    <div id="logo" onclick="slowScroll('#top')">
+        <span>DAF team</span>
+    </div>
+
+    <div id="about">
+        <a class="link-header" title="Возможности" onclick="slowScroll('#main')">Возможности</a>
+        <a class="link-header" title="Преимущества" onclick="slowScroll('#overview')">Преимущества</a>
+        <a class="link-header" title="Контакты" onclick="slowScroll('#contacts')">Контакты</a>
+        <a class="link-header" title="FAQ" onclick="slowScroll('#faq')">Вопросы и ответы</a>
+    </div>
+</header>
+
+<div id="top">
+    <h1>Сочинения</h1>
+    <h3>как смысл жизни!</h3>
+</div>
+
+<div id="main">
+    <div class="intro">
+        <h2>Наш сервис поможет вам!</h2>
+    </div>
+    <div class="text">
+        <a class="btn" style="background-color: darkslategrey; text-decoration: none; text-align: center;" href="">Написать сочинение</a>
+        <!--
+        <span>текст текст текст текст текс текст текст текст текст текст текст текс теткт текст текст текст текст текс текст текст текст текст текст текст текс теткт текст текст текст текст текс текст текст текст текст текст текст текс теткттекст текст текст текст текс текст текст текст текст текст текст текс теткт текст текст текст текст текс текст текст текст текст текст текст текс теткт</span>
+        -->
+    </div>
+</div>
+
+<div id="overview">
+    <h2>Преимщества</h2>
+    <h4>с нами все проще!</h4>
+
+    <div class="img">
+        <img src="~/Content/images/overviewex.jpg" alt="">
+        <span>Текст</span>
+    </div>
+    <div class="img">
+        <img src="~/Content/images/overviewex.jpg" alt="">
+        <span>Текст</span>
+    </div>
+    <div class="img">
+        <img src="~/Content/images/overviewex.jpg" alt="">
+        <span>Текст</span>
+    </div>
+    <div class="img">
+        <img src="~/Content/images/overviewex.jpg" alt="">
+        <span>Текст</span>
+    </div>
+</div>
+
+<div id="contacts">
+    <center><h5>Обратная связь</h5></center>
+    <form id="form_input" method="post" action="~/Home/SaveUserData">
+        <label for="name">Имя <span>*</span></label><br>
+        <input type="text" placeholder="Введите имя" name="name" id="name"><br>
+        <label for="name">Ваша почта <span>*</span></label><br>
+        <input type="text" placeholder="Введите email" name="email" id="email"><br>
+        <label for="name">Сообщение <span>*</span></label><br>
+        <input type="text" placeholder="Введите ваше сообщение" name="message" id="message">
+        <br>
+        <input type="submit" placeholder="Отправить" >
+    </form>
+</div>
+
+<div id="faq">
+    <div>
+        <span class="title">Информация</span><br>
+        <span class="heading">Нужна иструкция по пользованию?</span>
+        <p>много текста много текст много текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много те</p>
+    </div>
+    <div>
+        <span class="title">Поддержка</span><br>
+        <span class="heading">Заметили ошибку??</span>
+        <p>много текста много текст много текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много те</p>
+    </div>
+    <div>
+        <span class="title">Больше информации</span><br>
+        <span class="heading">Хотите узнать больше о функциях сервиса?</span>
+        <p>много текста много текст много текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много текстмного текста много те</p>
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script>
+    function slowScroll(id) {
+        $('html, body').animate({
+            scrollTop: $(id).offset().top
+        }, 500);
+    }
+
+    $(document).on("scroll", function () {
+        if ($(window).scrollTop() === 0)
+            $("header").removeClass("fixed");
+        else
+            $("header").attr("class", "fixed");
+    });
+</script>
