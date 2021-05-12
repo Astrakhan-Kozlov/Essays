@@ -1,0 +1,31 @@
+﻿@model System.Collections.ArrayList
+@{
+    ViewBag.Title = "Home Page";
+}
+
+@section Styles {
+    <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/style.css" rel="stylesheet" type="text/css">
+}
+
+<div class="row">
+    <div class="col-lg-3"></div>
+    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+        @if (Model != null)
+        {
+            foreach (string item in Model)
+            {
+                <p>@item</p>
+            }
+        }
+    </div>
+    <div class="col-lg-3"></div>
+</div>
+
+
+<form id="form_input" method="post" action="~/Essay/WriteEssay">
+    <label for="name">Предмет сочинения<span>*</span></label><br>
+    <input type="text" placeholder="О чём сочинение (в И.П.)" name="title" id="title"><br>
+    <br>
+    <input type="submit" placeholder="Отправить">
+</form>
