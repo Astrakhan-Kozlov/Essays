@@ -22,6 +22,7 @@ namespace Essays.Controllers
         [HttpPost]
         public ActionResult WriteEssay(string title)
         {
+            title = title.ToLower().Trim();
             // Variable "al" for storing the text of the essay
             ArrayList al = new ArrayList(4);
             Dictionary<string, string> phrases = new Dictionary<string, string>();
@@ -35,16 +36,18 @@ namespace Essays.Controllers
             {
                 JObject JO = JObject.Parse(sr.ReadToEnd());
                 phrases["introduction"] = JO["вступление"][random.Next(JO["вступление"].Count())].ToString();
+                phrases["text_introduction"] = JO["переходтекст"][random.Next(JO["переходтекст"].Count())].ToString();
+                phrases["text_conclusion"] = JO["заключениетекст"][random.Next(JO["заключениетекст"].Count())].ToString();
                 phrases["life"] = JO["переходжизнь"][random.Next(JO["переходжизнь"].Count())].ToString();
                 phrases["conclusion"] = JO["заключение"][random.Next(JO["заключение"].Count())].ToString();
             }
             string thesis = templates["тезис"][random.Next(templates["тезис"].Count())].ToString();
             string realLifeExample = templates["пример из жизни"][random.Next(templates["пример из жизни"].Count())].ToString();
 
-            al.Add("\t" + phrases["introduction"] + " " + title + " это " + thesis + ".");
-            al.Add("2 абзац.");
+            al.Add(phrases["introduction"] + " " + title + " - это " + thesis + ".");
+            al.Add(phrases["text_introduction"] + " <-------------------------------------> " + phrases["text_conclusion"]);
             al.Add(phrases["life"] + " " + realLifeExample + ".");
-            al.Add(phrases["conclusion"] + " " + title + " это " + thesis + ".");
+            al.Add(phrases["conclusion"] + " " + title + " - это " + thesis + ".");
             return View(al);
         }
 

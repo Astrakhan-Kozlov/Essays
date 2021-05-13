@@ -1,27 +1,30 @@
 ﻿@model System.Collections.ArrayList
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Пишем сочинение";
 }
 
 @section Styles {
     <link href="~/Content/bootstrap.css" rel="stylesheet" type="text/css">
     <link href="~/Content/style.css" rel="stylesheet" type="text/css">
+    <link href="~/Content/Essay.css" rel="stylesheet" type="text/css">
 }
 
 <div class="row">
-    <div class="col-lg-3"></div>
-    <div class="col-lg-6 col-md-12 col-sm-12 col-xs-12">
+    <br>
+</div>
+<div class="row">
+    <div class="col-lg-4"></div>
+    <div class="col-lg-4 col-md-12 col-sm-12 col-xs-12">
         @if (Model != null)
         {
             foreach (string item in Model)
             {
-                <p>@item</p>
+                <p style="text-indent: 15px;">@item</p>
             }
         }
     </div>
-    <div class="col-lg-3"></div>
+    <div class="col-lg-4"></div>
 </div>
-
 
 <form id="form_input" method="post" action="~/Essay/WriteEssay">
     <label for="name">Предмет сочинения<span>*</span></label><br>

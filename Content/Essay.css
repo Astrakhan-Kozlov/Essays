@@ -1,0 +1,11 @@
+﻿@import url('https://fonts.googleapis.com/css?family=Roboto|Suez+One');
+
+body {
+    margin: 0;
+    font-family: Trebuchet MS, Helvetica;
+}
+
+p {
+    font-size: 20px;
+    font-family: 'Roboto Slab', serif;
+}
