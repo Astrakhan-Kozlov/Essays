@@ -5,15 +5,12 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - DAF Team</title>
+    @Styles.Render("~/Content/css")
+    <!--Scripts.Render("~/bundles/modernizr")-->
     @RenderSection("Styles", false)
-    <!--
-    Styles.Render("~/Content/css")
-    Scripts.Render("~/bundles/modernizr")
-    -->
 </head>
 <body>
-    @RenderBody()
-    <!--<div class="navbar navbar-inverse navbar-fixed-top">
+    <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -28,17 +25,26 @@
                     <li>@Html.ActionLink("Домашняя страница", "Index", "Home")</li>
                     <li>@Html.ActionLink("Информация", "About", "Home")</li>
                     <li>@Html.ActionLink("Связаться", "Contact", "Home")</li>
+                    @if (ViewBag.login != null)
+                    {
+                        <li>@Html.ActionLink($"{ViewBag.login}", "", "")</li>
+                        <li>@Html.ActionLink("Выйти", "LogOut", "Users")</li>
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Авторизоваться", "LogIn", "Users")</li>
+                    }
                 </ul>
             </div>
         </div>
     </div>
-    <div class="container body-content">
-
+    <div class="container body-content" style="margin-top: 40px;">
+        @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - мое приложение ASP.NET</p>
+            <center>&copy; @DateTime.Now.Year - Essays</center>
         </footer>
-    </div>-->
+    </div>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")

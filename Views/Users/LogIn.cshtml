@@ -1,0 +1,15 @@
+﻿
+@{
+    ViewBag.Title = "LogIn";
+}
+
+
+<h2>LogIn</h2>
+
+<form action="/Users/LogIn" method="post">
+    <input type="text" name="login" placeholder="login">
+    <input type="text" name="password" placeholder="password">
+    <input type="submit">
+</form>
+
+<h3>Если нет аккаунта => <a href="/Users/Create">Зарегистрироваться</a></h3>

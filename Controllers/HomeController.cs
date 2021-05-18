@@ -14,6 +14,8 @@ namespace Essays.Controllers
     {
         public ActionResult Index()
         {
+            ViewBag.login = Session["Login"];
+            ViewBag.role = Session["Role"];
             return View();
         }
 
@@ -43,6 +45,8 @@ namespace Essays.Controllers
 
         public ActionResult About()
         {
+            ViewBag.login = Session["Login"];
+            ViewBag.role = Session["Role"];
             ViewBag.Message = "Your application description page.";
 
             return View();
@@ -50,6 +54,8 @@ namespace Essays.Controllers
 
         public ActionResult Contact()
         {
+            ViewBag.login = Session["Login"];
+            ViewBag.role = Session["Role"];
             ViewBag.Message = "Your contact page.";
 
             return View();
