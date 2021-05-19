@@ -6,10 +6,9 @@
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
-    <input type="hidden" name="Role" value="User">
     <div class="form-horizontal">
         <h4>User</h4>
         <hr />
@@ -25,7 +24,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Password)
+                <input name="Password" type="password" >
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -41,3 +40,23 @@
 <div>
     @Html.ActionLink("Back to List", "Index")
 </div>
+
+<!--<script>
+    function checkPass() {
+        var input1 = document.getElementById('password1');
+        var input2 = document.getElementById('password2');
+        var passw = /^[A-Za-z]\w{7,14}$/;
+        if (input1.value.match(passw)) {
+            input1.setCustomValidity('The password contains forbidden characters.');
+            return false;
+        }
+
+        if (input1.value != input2.value) {
+            input1.setCustomValidity('Passwords should match.');
+            return false;
+        } else {
+            input1.setCustomValidity('');
+            return true;
+        }
+    }
+</script>-->

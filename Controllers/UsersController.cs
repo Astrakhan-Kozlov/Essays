@@ -4,6 +4,8 @@ using System.Data;
 using System.Data.Entity;
 using System.Linq;
 using System.Net;
+using System.Security.Cryptography;
+using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using WebApplicationAuthorization.Models;
@@ -13,6 +15,11 @@ namespace WebApplicationAuthorization.Controllers
     public class UsersController : Controller
     {
         private UserContext db = new UserContext();
+
+        public ActionResult Index()
+        {
+            return View(db.Users.ToList());
+        }
 
         // GET: Users/Details/5
         public ActionResult Details(int? id)
@@ -37,13 +44,16 @@ namespace WebApplicationAuthorization.Controllers
         [HttpPost]
         public ActionResult LogIn(string login, string password)
         {
-            User usr = db.Users.Where(u => u.Login == login && u.Password == password).FirstOrDefault();
+            var hashBytes = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(password));
+            string pass = Convert.ToBase64String(hashBytes);
+            User usr = db.Users.Where(u => u.Login == login && u.Password == pass).FirstOrDefault();
             if (usr != null)
             {
                 Session["Login"] = usr.Login;
                 Session["Role"] = usr.Role;
+                return Redirect("/Home/Index");
             }
-            return Redirect("/Home/Index");
+            return RedirectToAction("Login");
         }
 
         public ActionResult LogOut()
@@ -67,6 +77,9 @@ namespace WebApplicationAuthorization.Controllers
         {
             if (ModelState.IsValid)
             {
+                var hash = MD5.Create().ComputeHash(Encoding.UTF8.GetBytes(user.Password));
+                user.Password = Convert.ToBase64String(hash);
+                user.Role = "User";
                 db.Users.Add(user);
                 db.SaveChanges();
                 return Redirect("/Home/Index");

@@ -47,7 +47,6 @@ namespace Essays.Controllers
         {
             ViewBag.login = Session["Login"];
             ViewBag.role = Session["Role"];
-            ViewBag.Message = "Your application description page.";
 
             return View();
         }
@@ -56,7 +55,6 @@ namespace Essays.Controllers
         {
             ViewBag.login = Session["Login"];
             ViewBag.role = Session["Role"];
-            ViewBag.Message = "Your contact page.";
 
             return View();
         }

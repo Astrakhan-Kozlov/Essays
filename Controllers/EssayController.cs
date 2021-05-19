@@ -7,6 +7,8 @@ using Newtonsoft.Json.Linq;
 using System.Linq;
 using System.Collections.Generic;
 using System.Collections;
+using System.Security.Cryptography;
+using System.Text;
 
 namespace Essays.Controllers
 {
@@ -16,12 +18,17 @@ namespace Essays.Controllers
         [HttpGet]
         public ActionResult WriteEssay()
         {
+            ViewBag.login = Session["Login"];
+            ViewBag.role = Session["Role"];
+            
             return View();
         }
 
         [HttpPost]
         public ActionResult WriteEssay(string title)
         {
+            ViewBag.login = Session["Login"];
+            ViewBag.role = Session["Role"];
             title = title.ToLower().Trim();
             // Variable "al" for storing the text of the essay
             ArrayList al = new ArrayList(4);
@@ -30,6 +37,11 @@ namespace Essays.Controllers
             using (StreamReader sr = new StreamReader(new FileStream(HostingEnvironment.MapPath($"~/App_Data/DataEssays.json"), FileMode.Open)))
             {
                 JObject JO = JObject.Parse(sr.ReadToEnd());
+                if (JO[title] == null)
+                {
+                    al.Add("Заданная тема не поддерживается");
+                    return View(al);
+                }
                 templates = JO[title];
             }
             using (StreamReader sr = new StreamReader(new FileStream(HostingEnvironment.MapPath($"~/App_Data/Phrases.json"), FileMode.Open)))
